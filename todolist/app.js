@@ -2,6 +2,7 @@ window.addEventListener("load", () => {
     const form = document.querySelector("#new-task-form")
     const input = document.querySelector("#new-task-input")
     const list_el = document.querySelector("#tasks")
+    let arr = []; //for array in storage
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -46,8 +47,13 @@ window.addEventListener("load", () => {
 
         list_el.appendChild(task_el);
 
-        let generator = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-        localStorage.setItem(`${generator}`, `${task}`);
+        //pushing new objects to array
+        let obj = {
+            value: task
+        }
+        arr.push(obj);
+        //saving array in storage
+        localStorage.setItem("Tasks", `${JSON.stringify(arr)}`);
 
         input.value = "";
 
@@ -69,6 +75,7 @@ window.addEventListener("load", () => {
                 task_edit_el.innerText = "Save";
                 task_input_el.removeAttribute("readonly");
                 task_input_el.focus();
+
             } else {
                 task_edit_el.innerText = "Edit";
                 task_input_el.setAttribute("readonly", "readonly");
@@ -76,6 +83,13 @@ window.addEventListener("load", () => {
         });
 
         task_delete_el.addEventListener('click', (e) => {
+            //getting array from storage
+            const tempArr = JSON.parse(localStorage.getItem("Tasks"));
+            //removing tasks
+            const filter = tempArr.filter(e => e.value !== task_input_el.value);
+            //re-setting storage
+            localStorage.setItem("Tasks", JSON.stringify(filter));
+
             list_el.removeChild(task_el);
         });
     });
