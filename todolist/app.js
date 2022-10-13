@@ -18,7 +18,6 @@ window.addEventListener("load", () => {
         const task_content_el = document.createElement("div");
         task_content_el.classList.add("content");
 
-
         task_el.appendChild(task_content_el);
         const task_input_el = document.createElement("input");
 
@@ -47,6 +46,9 @@ window.addEventListener("load", () => {
 
         list_el.appendChild(task_el);
 
+        let generator = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        localStorage.setItem(`${generator}`, `${task}`);
+
         input.value = "";
 
         task_edit_el.addEventListener("click", () => {
@@ -63,19 +65,19 @@ window.addEventListener("load", () => {
         });
 
         task_edit_el.addEventListener('click', (e) => {
-			if (task_edit_el.innerText.toLowerCase() == "edit") {
-				task_edit_el.innerText = "Save";
-				task_input_el.removeAttribute("readonly");
-				task_input_el.focus();
-			} else {
-				task_edit_el.innerText = "Edit";
-				task_input_el.setAttribute("readonly", "readonly");
-			}
-		});
+            if (task_edit_el.innerText.toLowerCase() == "edit") {
+                task_edit_el.innerText = "Save";
+                task_input_el.removeAttribute("readonly");
+                task_input_el.focus();
+            } else {
+                task_edit_el.innerText = "Edit";
+                task_input_el.setAttribute("readonly", "readonly");
+            }
+        });
 
-		task_delete_el.addEventListener('click', (e) => {
-			list_el.removeChild(task_el);
-		});
-	});
+        task_delete_el.addEventListener('click', (e) => {
+            list_el.removeChild(task_el);
+        });
+    });
 
 })
