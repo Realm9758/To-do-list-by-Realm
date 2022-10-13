@@ -111,7 +111,43 @@ main {
     border-radius: 1rem;
     margin-bottom: 1rem;
 }
+#tasks .task .content{
+    flex: 1 1 0%;
+}
+.todo-item > .checkbox {
+    margin-right: 20px;
+    position: relative;
+    width: 0;
+    transition: all .2s ease-in-out;
+}
 
+.todo-item > .checkbox::before {
+    content: '';
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 55%;
+    top: 55%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    border: 2px solid rgb(23, 124, 255);
+    cursor: pointer;
+    background-color: #fff;
+    transition: all .2s ease-in-out;
+    margin-left: 5px;
+}
+
+.todo-item.checked {
+    color: rgb(23, 124, 255);
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+.todo-item.checked > .checkbox::before {
+    border: 5px solid rgb(170,207,255);
+    background-color: rgb(23, 124, 255);
+    transition: all .2s ease-in-out;
+}
 #tasks .task .content .text{
     color: var(--light);
     font-size: 1.125rem;
