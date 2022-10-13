@@ -76,11 +76,6 @@ window.addEventListener("load", () => {
 		task_delete_el.addEventListener('click', (e) => {
 			list_el.removeChild(task_el);
 		});
-    const uptadeStorage = () => {
-    localStorage.setItem('todos', JSON.stringify(todos))
-    localStorage.setItem('id', JSON.stringify(id))
-}
 	});
-    uptadeStorage();
 
 })
