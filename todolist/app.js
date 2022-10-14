@@ -141,3 +141,16 @@ window.addEventListener("load", () => {
     });
 
 })
+var i = 0;
+var txt = "What do you have planned today?";
+
+function typeWriter() {
+	if (i < txt.length) {
+		document.getElementsByClassName("js-typewrite")[0].innerHTML +=
+			txt.charAt(i);
+		i++;
+		setTimeout(typeWriter, 100);
+	}
+}
+
+setTimeout(typeWriter, 2000);

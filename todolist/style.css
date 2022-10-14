@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
-
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
 :root {
 	--dark: #374151;
 	--darker: #1f2937;
@@ -134,6 +134,29 @@ main {
 	background-color: #fff;
 	transition: all 0.2s ease-in-out;
 	margin-left: 5px;
+}
+
+.content {
+    display: block;
+    font-family: 'Anonymous Pro', sans-serif;
+    position: relative;
+	color: rgba(255,255,255,.75);
+	font-family: 'Anonymous Pro', monospace; 
+}
+.typewrite {
+  font-size: 180%;
+  border-right: 2px solid rgba(255,255,255,.75);
+  font-family: 'Anonymous Pro', sans-serif;
+  line-height: 1.15;
+}
+
+.anim-typewrite {
+  animation: blinkTextCursor 500ms infinite normal;
+}
+
+@keyframes blinkTextCursor{
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
 }
 
 .todo-item.checked {
