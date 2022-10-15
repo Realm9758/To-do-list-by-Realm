@@ -137,51 +137,58 @@ main {
 }
 
 .content {
-    display: block;
-    font-family: 'Anonymous Pro', sans-serif;
-    position: relative;
-	color: rgba(255,255,255,.75);
-	font-family: 'Anonymous Pro', monospace; 
+	display: block;
+	font-family: "Anonymous Pro", sans-serif;
+	position: relative;
+	color: rgba(255, 255, 255, 0.75);
+	font-family: "Anonymous Pro", monospace;
 }
 .typewrite {
-  font-size: 180%;
-  border-right: 2px solid rgba(255,255,255,.75);
-  font-family: 'Anonymous Pro', sans-serif;
-  line-height: 1.15;
+	font-size: 180%;
+	border-right: 2px solid rgba(255, 255, 255, 0.75);
+	font-family: "Anonymous Pro", sans-serif;
+	line-height: 1.15;
 }
 
 .anim-typewrite {
-  animation: blinkTextCursor 500ms infinite normal;
+	animation: blinkTextCursor 500ms infinite normal;
 }
 
-@keyframes blinkTextCursor{
-  from{border-right-color: rgba(255,255,255,.75);}
-  to{border-right-color: transparent;}
+@keyframes blinkTextCursor {
+	from {
+		border-right-color: rgba(255, 255, 255, 0.75);
+	}
+	to {
+		border-right-color: transparent;
+	}
 }
-
 
 .contentt {
-    display: block;
+	display: block;
 	float: left;
-    font-family: 'Anonymous Pro', sans-serif;
-	color: rgba(255,255,255,.75);
-	font-family: 'Anonymous Pro', monospace; 
+	font-family: "Anonymous Pro", sans-serif;
+	color: rgba(255, 255, 255, 0.75);
+	font-family: "Anonymous Pro", monospace;
 }
 
 .typewritee {
-  font-size: 180%;
-  border-right: 2px solid rgba(255,255,255,.75);
-  font-family: 'Anonymous Pro', sans-serif;
-  line-height: 1.15;
+	font-size: 180%;
+	border-right: 2px solid rgba(255, 255, 255, 0.75);
+	font-family: "Anonymous Pro", sans-serif;
+	line-height: 1.15;
 }
 
 .anim-typewritee {
-  animation: blinkTextCursor 500ms infinite normal;
+	animation: blinkTextCursor 500ms infinite normal;
 }
 
-@keyframes blinkTextCursor{
-  from{border-right-color: rgba(255,255,255,.75);}
-  to{border-right-color: transparent;}
+@keyframes blinkTextCursor {
+	from {
+		border-right-color: rgba(255, 255, 255, 0.75);
+	}
+	to {
+		border-right-color: transparent;
+	}
 }
 
 .todo-item.checked {
