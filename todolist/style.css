@@ -159,6 +159,31 @@ main {
   to{border-right-color: transparent;}
 }
 
+
+.contentt {
+    display: block;
+	float: left;
+    font-family: 'Anonymous Pro', sans-serif;
+	color: rgba(255,255,255,.75);
+	font-family: 'Anonymous Pro', monospace; 
+}
+
+.typewritee {
+  font-size: 180%;
+  border-right: 2px solid rgba(255,255,255,.75);
+  font-family: 'Anonymous Pro', sans-serif;
+  line-height: 1.15;
+}
+
+.anim-typewritee {
+  animation: blinkTextCursor 500ms infinite normal;
+}
+
+@keyframes blinkTextCursor{
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
+}
+
 .todo-item.checked {
 	color: rgb(23, 124, 255);
 	text-decoration: line-through;
@@ -170,6 +195,9 @@ main {
 	background-color: rgb(23, 124, 255);
 	transition: all 0.2s ease-in-out;
 }
+/* GLOBAL STYLES */
+
+/* DEMO-SPECIFIC STYLES */
 #tasks .task .content .text {
 	color: var(--light);
 	font-size: 1.125rem;
