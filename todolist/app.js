@@ -1,53 +1,63 @@
 window.addEventListener("load", () => {
-    const form = document.querySelector("#new-task-form")
-    const input = document.querySelector("#new-task-input")
-    const list_el = document.querySelector("#tasks")
-
-
-
-    //For storage
+    const form = document.querySelector("#new-task-form");
+    const input = document.querySelector("#new-task-input");
+    const list_el = document.querySelector("#tasks");
     let arr = [];
 
-    if (arr.length === 0 && localStorage.length) {
-        arr = JSON.parse(localStorage.getItem("Tasks"));
 
-        for (var item of arr) {
-            const task_el_storage = document.createElement("div");
-            task_el_storage.classList.add("task");
+    const displayStoragedTasks = function () {
+        if (arr.length === 0 && localStorage.length) {
+            arr = JSON.parse(localStorage.getItem("Tasks"));
 
-            const task_content_el_storage = document.createElement("div");
-            task_content_el_storage.classList.add("content");
+            for (var item of arr) {
+                const task_el_storage = document.createElement("div");
+                task_el_storage.classList.add("task");
 
-            //Input
-            const task_input_el_storage = document.createElement("input");
-            task_input_el_storage.classList.add("text");
-            task_input_el_storage.type = "text";
-            task_input_el_storage.value = item;
-            task_input_el_storage.setAttribute("readonly", "readonly");
+                const task_content_el_storage = document.createElement("div");
+                task_content_el_storage.classList.add("content");
 
-            task_el_storage.appendChild(task_content_el_storage);
-            task_content_el_storage.appendChild(task_input_el_storage);
+                //Input
+                const task_input_el_storage = document.createElement("input");
+                task_input_el_storage.classList.add("text");
+                task_input_el_storage.type = "text";
+                task_input_el_storage.value = item;
+                task_input_el_storage.setAttribute("readonly", "readonly");
 
-            //Actions
-            const task_actions_el_storage = document.createElement("div");
-            task_actions_el_storage.classList.add("actions");
+                task_el_storage.appendChild(task_content_el_storage);
+                task_content_el_storage.appendChild(task_input_el_storage);
 
-            const task_edit_el_storage = document.createElement("button");
-            task_edit_el_storage.classList.add("edit");
-            task_edit_el_storage.innerHTML = "Edit";
+                //Actions
+                const task_actions_el_storage = document.createElement("div");
+                task_actions_el_storage.classList.add("actions");
 
-            const task_delete_el_storage = document.createElement("button");
-            task_delete_el_storage.classList.add("delete");
-            task_delete_el_storage.innerHTML = "Delete";
+                const task_edit_el_storage = document.createElement("button");
+                task_edit_el_storage.classList.add("edit");
+                task_edit_el_storage.innerHTML = "Edit";
 
-            task_actions_el_storage.appendChild(task_edit_el_storage)
-            task_actions_el_storage.appendChild(task_delete_el_storage)
+                const task_delete_el_storage = document.createElement("button");
+                task_delete_el_storage.classList.add("delete");
+                task_delete_el_storage.innerHTML = "Delete";
+
+                task_actions_el_storage.appendChild(task_edit_el_storage)
+                task_actions_el_storage.appendChild(task_delete_el_storage)
 
 
-            task_el_storage.appendChild(task_actions_el_storage)
-            list_el.appendChild(task_el_storage)
+                task_el_storage.appendChild(task_actions_el_storage)
+                list_el.appendChild(task_el_storage)
+
+                task_delete_el_storage.addEventListener('click', (e) => {
+                    // Getting array from storage
+                    const tempArr = JSON.parse(localStorage.getItem("Tasks"));
+                    // Removing tasks
+                    const filter = tempArr.filter(e => e !== task_input_el_storage.value);
+                    // Re-setting storage
+                    localStorage.setItem("Tasks", JSON.stringify(filter));
+                    list_el.removeChild(task_el_storage);
+                });
+            };
         };
-    };
+    }
+    displayStoragedTasks();
 
 
 
@@ -129,13 +139,11 @@ window.addEventListener("load", () => {
         });
 
         task_delete_el.addEventListener('click', (e) => {
-            //Getting array from storage
             const tempArr = JSON.parse(localStorage.getItem("Tasks"));
-            //Removing tasks
+            // Removing tasks
             const filter = tempArr.filter(e => e !== task_input_el.value);
-            //Re-setting storage
+            // Re-setting storage
             localStorage.setItem("Tasks", JSON.stringify(filter));
-            //LocalStorage.clear();
             list_el.removeChild(task_el);
         });
     });
@@ -145,12 +153,12 @@ var i = 0;
 var txt = "What do you have planned today?";
 
 function typeWriter() {
-	if (i < txt.length) {
-		document.getElementsByClassName("js-typewrite")[0].innerHTML +=
-			txt.charAt(i);
-		i++;
-		setTimeout(typeWriter, 100);
-	}
+    if (i < txt.length) {
+        document.getElementsByClassName("js-typewrite")[0].innerHTML +=
+            txt.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+    }
 }
 
 setTimeout(typeWriter, 2000);
