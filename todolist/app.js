@@ -55,33 +55,18 @@ window.addEventListener("load", () => {
 					list_el.removeChild(task_el_storage);
 				});
 
-				task_edit_el_storage.addEventListener("click", (e) => {
-					const tempArr = JSON.parse(localStorage.getItem("Tasks"));
+			task_edit_el_storage.addEventListener('click', (e) => {
+			const input = content.querySelector('input');
+			input.removeAttribute('readonly');
+			task_input_el_storage.focus();
+			task_input_el.addEventListener('blur', (e) => {
+				task_input_el.setAttribute('readonly', true);
+				todo.content = e.target.value;
+				localStorage.setItem('todos', JSON.stringify(todos));
+				displayStoragedTasks();
 
-					const filter = tempArr.filter(
-						(e) => e !== task_input_el_storage.value
-					);
-					if (
-						task_edit_el_storage.innerText.toLowerCase() == "edit"
-					) {
-						task_edit_el_storage.innerText = "Save";
-						task_input_el_storage.removeAttribute(
-							"readonly",
-                            "readonly"
-						);
-                        task_input_el_storage.focus();
-						
-					} else {
-						task_edit_el_storage.innerText = "Edit";
-						task_input_el_storage.setAttribute(
-							"readonly",
-							"readonly"
-						);
-					}
-					localStorage.setItem("Tasks", JSON.stringify(filter));
-
-				});
-			}
+			})
+		})
 		}
 	};
 	displayStoragedTasks();
