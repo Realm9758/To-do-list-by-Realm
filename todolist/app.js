@@ -55,18 +55,13 @@ window.addEventListener("load", () => {
 					list_el.removeChild(task_el_storage);
 				});
 
-			task_edit_el_storage.addEventListener('click', (e) => {
-			const input = content.querySelector('input');
-			input.removeAttribute('readonly');
-			task_input_el_storage.focus();
-			task_input_el.addEventListener('blur', (e) => {
-				task_input_el.setAttribute('readonly', true);
-				todo.content = e.target.value;
-				localStorage.setItem('todos', JSON.stringify(todos));
-				displayStoragedTasks();
+                task_edit_el_storage.addEventListener('click', (e) => {
+                task_edit_el_storage.removeAttribute('readonly');
+                task_input_el_storage.setAttribute('readonly', true);
+                localStorage.setItem('todos', JSON.stringify(todos));
+                displayStoragedTasks();
 
-			})
-		})
+            });
 		}
 	};
 	displayStoragedTasks();
@@ -150,10 +145,9 @@ window.addEventListener("load", () => {
 			const filter = tempArr.filter((e) => e !== task_input_el.value);
 			// Re-setting storage
 			localStorage.setItem("Tasks", JSON.stringify(filter));
-			list_el.removeChild(task_el);
 		});
+
 	});
-});
 var i = 0;
 var txt = "What do you have planned today?";
 
@@ -166,4 +160,5 @@ function typeWriter() {
 	}
 }
 
-setTimeout(typeWriter, 2000);
+setTimeout(typeWriter, 2000);}
+});
