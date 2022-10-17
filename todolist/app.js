@@ -66,7 +66,8 @@ window.addEventListener("load", () => {
 					) {
 						task_edit_el_storage.innerText = "Save";
 						task_input_el_storage.removeAttribute(
-							"readonly"
+							"readonly",
+                            "readonly"
 						);
                         task_input_el_storage.focus();
 						
@@ -78,6 +79,7 @@ window.addEventListener("load", () => {
 						);
 					}
 					localStorage.setItem("Tasks", JSON.stringify(filter));
+
 				});
 			}
 		}
