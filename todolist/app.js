@@ -4,67 +4,67 @@ window.addEventListener("load", () => {
 	const list_el = document.querySelector("#tasks");
 	let arr = [];
 
-	const displayStoragedTasks = function () {
-		if (arr.length === 0 && localStorage.length) {
-			arr = JSON.parse(localStorage.getItem("Tasks"));
+	// const displayStoragedTasks = function () {
+	// 	if (arr.length === 0 && localStorage.length) {
+	// 		arr = JSON.parse(localStorage.getItem("Tasks"));
 
-			for (var item of arr) {
-				const task_el_storage = document.createElement("div");
-				task_el_storage.classList.add("task");
+	// 		for (var item of arr) {
+	// 			const task_el_storage = document.createElement("div");
+	// 			task_el_storage.classList.add("task");
 
-				const task_content_el_storage = document.createElement("div");
-				task_content_el_storage.classList.add("content");
+	// 			const task_content_el_storage = document.createElement("div");
+	// 			task_content_el_storage.classList.add("content");
 
-				//Input
-				const task_input_el_storage = document.createElement("input");
-				task_input_el_storage.classList.add("text");
-				task_input_el_storage.type = "text";
-				task_input_el_storage.value = item;
-				task_input_el_storage.setAttribute("readonly", "readonly");
+	// 			//Input
+	// 			const task_input_el_storage = document.createElement("input");
+	// 			task_input_el_storage.classList.add("text");
+	// 			task_input_el_storage.type = "text";
+	// 			task_input_el_storage.value = item;
+	// 			task_input_el_storage.setAttribute("readonly", "readonly");
 
-				task_el_storage.appendChild(task_content_el_storage);
-				task_content_el_storage.appendChild(task_input_el_storage);
+	// 			task_el_storage.appendChild(task_content_el_storage);
+	// 			task_content_el_storage.appendChild(task_input_el_storage);
 
-				//Actions
-				const task_actions_el_storage = document.createElement("div");
-				task_actions_el_storage.classList.add("actions");
+	// 			//Actions
+	// 			const task_actions_el_storage = document.createElement("div");
+	// 			task_actions_el_storage.classList.add("actions");
 
-				const task_edit_el_storage = document.createElement("button");
-				task_edit_el_storage.classList.add("edit");
-				task_edit_el_storage.innerHTML = "Edit";
+	// 			const task_edit_el_storage = document.createElement("button");
+	// 			task_edit_el_storage.classList.add("edit");
+	// 			task_edit_el_storage.innerHTML = "Edit";
 
-				const task_delete_el_storage = document.createElement("button");
-				task_delete_el_storage.classList.add("delete");
-				task_delete_el_storage.innerHTML = "Delete";
+	// 			const task_delete_el_storage = document.createElement("button");
+	// 			task_delete_el_storage.classList.add("delete");
+	// 			task_delete_el_storage.innerHTML = "Delete";
 
-				task_actions_el_storage.appendChild(task_edit_el_storage);
-				task_actions_el_storage.appendChild(task_delete_el_storage);
+	// 			task_actions_el_storage.appendChild(task_edit_el_storage);
+	// 			task_actions_el_storage.appendChild(task_delete_el_storage);
 
-				task_el_storage.appendChild(task_actions_el_storage);
-				list_el.appendChild(task_el_storage);
+	// 			task_el_storage.appendChild(task_actions_el_storage);
+	// 			list_el.appendChild(task_el_storage);
 
-				task_delete_el_storage.addEventListener("click", (e) => {
-					// Getting array from storage
-					const tempArr = JSON.parse(localStorage.getItem("Tasks"));
-					// Removing tasks
-					const filter = tempArr.filter(
-						(e) => e !== task_input_el_storage.value
-					);
-					// Re-setting storage
-					localStorage.setItem("Tasks", JSON.stringify(filter));
-					list_el.removeChild(task_el_storage);
-				});
+	// 			task_delete_el_storage.addEventListener("click", (e) => {
+	// 				// Getting array from storage
+	// 				const tempArr = JSON.parse(localStorage.getItem("Tasks"));
+	// 				// Removing tasks
+	// 				const filter = tempArr.filter(
+	// 					(e) => e !== task_input_el_storage.value
+	// 				);
+	// 				// Re-setting storage
+	// 				localStorage.setItem("Tasks", JSON.stringify(filter));
+	// 				list_el.removeChild(task_el_storage);
+	// 			});
 
-				task_edit_el_storage.addEventListener('click', (e) => {
-					task_edit_el_storage.removeAttribute('readonly');
-					task_input_el_storage.setAttribute('readonly', true);
-					localStorage.setItem('todos', JSON.stringify(todos));
-					displayStoragedTasks();
-				});
-			}
-		};
-	};
-	displayStoragedTasks();
+	// 			task_edit_el_storage.addEventListener('click', (e) => {
+	// 				task_edit_el_storage.removeAttribute('readonly');
+	// 				task_input_el_storage.setAttribute('readonly', true);
+	// 				// localStorage.setItem('todos', JSON.stringify(todos));
+	// 				displayStoragedTasks();
+	// 			});
+	// 		}
+	// 	};
+	// };
+	// displayStoragedTasks();
 
 	form.addEventListener("submit", (e) => {
 		e.preventDefault();
@@ -120,6 +120,8 @@ window.addEventListener("load", () => {
 		task_edit_el.addEventListener("click", () => {
 			let tempArr = JSON.parse(localStorage.getItem("Tasks"));
 			let oldValue = tempArr.filter((e) => e === task_input_el.value);
+			var index = tempArr.indexOf(oldValue)
+			console.log(index, oldValue)
 
 			if (task_edit_el.innerText.toLowerCase() == "edit") {
 				task_input_el.removeAttribute("readonly");
@@ -129,29 +131,32 @@ window.addEventListener("load", () => {
 				task_input_el.setAttribute("readonly", "readonly");
 				task_edit_el.innerText = "Edit";
 
-				for (let i = 0; i < tempArr.length; i++) {
-					if (tempArr[i] !== task_input_el.value) {
-						tempArr[i] = task_input_el.value;
-
-
-						// localStorage.setItem('Tasks', JSON.stringify(tempArr))
-					} else {
-						console.log(tempArr[i] = oldValue)
-					}
-				};
-			};
-		});
-
-		task_edit_el.addEventListener("click", (e) => {
-			if (task_edit_el.innerText.toLowerCase() == "edit") {
-				task_edit_el.innerText = "Save";
-				task_input_el.removeAttribute("readonly");
-				task_input_el.focus();
-			} else {
-				task_edit_el.innerText = "Edit";
-				task_input_el.setAttribute("readonly", "readonly");
+				// for (let i = 0; i < tempArr.length; i++) {
+				// 	if (oldValue !== newValue) {
+				// 		oldValue = newValue //Changing from old to new
+				// 		tempArr.slice(oldValue, 1, newValue)
+				// 		console.log(tempArr)
+				// 	}
+				// 	console.log(tempArr)
+				// };
+				// const newValue = task_input_el.value
+				// tempArr.splice(oldValue, oldValue, newValue)
+				// console.log(tempArr)
 			}
 		});
+
+
+		// localStorage.setItem('Tasks', JSON.stringify(tempArr))
+		// task_edit_el.addEventListener("click", (e) => {
+		// 	if (task_edit_el.innerText.toLowerCase() == "edit") {
+		// 		task_edit_el.innerText = "Save";
+		// 		task_input_el.removeAttribute("readonly");
+		// 		task_input_el.focus();
+		// 	} else {
+		// 		task_edit_el.innerText = "Edit";
+		// 		task_input_el.setAttribute("readonly", "readonly");
+		// 	}
+		// });
 
 		task_delete_el.addEventListener("click", (e) => {
 			const tempArr = JSON.parse(localStorage.getItem("Tasks"));
