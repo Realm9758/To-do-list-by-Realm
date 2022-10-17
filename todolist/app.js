@@ -5,7 +5,6 @@ window.addEventListener("load", () => {
 	let arr = [];
 
 	const displayStoragedTasks = function () {
-		localStorage.clear()
 		if (arr.length === 0 && localStorage.length) {
 			arr = JSON.parse(localStorage.getItem("Tasks"));
 
@@ -133,7 +132,7 @@ window.addEventListener("load", () => {
 				for (let i = 0; i < tempArr.length; i++) {
 					if (tempArr[i] !== task_input_el.value) {
 						tempArr[i] = task_input_el.value;
-						console.log(tempArr[i], task_input_el.value)
+
 
 						// localStorage.setItem('Tasks', JSON.stringify(tempArr))
 					} else {
@@ -160,6 +159,7 @@ window.addEventListener("load", () => {
 			const filter = tempArr.filter((e) => e !== task_input_el.value);
 			// Re-setting storage
 			localStorage.setItem("Tasks", JSON.stringify(filter));
+			list_el.removeChild(task_el);
 		});
 
 	});
