@@ -55,7 +55,7 @@ window.addEventListener("load", () => {
 					list_el.removeChild(task_el_storage);
 				});
 
-				task_edit_el.addEventListener("click", (e) => {
+				task_edit_el_storage.addEventListener("click", (e) => {
 					const tempArr = JSON.parse(localStorage.getItem("Tasks"));
 
 					const filter = tempArr.filter(
@@ -66,10 +66,10 @@ window.addEventListener("load", () => {
 					) {
 						task_edit_el_storage.innerText = "Save";
 						task_input_el_storage.removeAttribute(
-							"readonly",
 							"readonly"
 						);
-						task_input_el_storage.focus();
+                        task_input_el_storage.focus();
+						
 					} else {
 						task_edit_el_storage.innerText = "Edit";
 						task_input_el_storage.setAttribute(
