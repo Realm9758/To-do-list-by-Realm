@@ -5,6 +5,7 @@ window.addEventListener("load", () => {
 	let arr = [];
 
 	const displayStoragedTasks = function () {
+		localStorage.clear()
 		if (arr.length === 0 && localStorage.length) {
 			arr = JSON.parse(localStorage.getItem("Tasks"));
 
@@ -55,14 +56,14 @@ window.addEventListener("load", () => {
 					list_el.removeChild(task_el_storage);
 				});
 
-                task_edit_el_storage.addEventListener('click', (e) => {
-                task_edit_el_storage.removeAttribute('readonly');
-                task_input_el_storage.setAttribute('readonly', true);
-                localStorage.setItem('todos', JSON.stringify(todos));
-                displayStoragedTasks();
-
-            });
-		}
+				task_edit_el_storage.addEventListener('click', (e) => {
+					task_edit_el_storage.removeAttribute('readonly');
+					task_input_el_storage.setAttribute('readonly', true);
+					localStorage.setItem('todos', JSON.stringify(todos));
+					displayStoragedTasks();
+				});
+			}
+		};
 	};
 	displayStoragedTasks();
 
@@ -118,6 +119,9 @@ window.addEventListener("load", () => {
 		input.value = "";
 
 		task_edit_el.addEventListener("click", () => {
+			let tempArr = JSON.parse(localStorage.getItem("Tasks"));
+			let oldValue = tempArr.filter((e) => e === task_input_el.value);
+
 			if (task_edit_el.innerText.toLowerCase() == "edit") {
 				task_input_el.removeAttribute("readonly");
 				task_input_el.focus();
@@ -125,7 +129,18 @@ window.addEventListener("load", () => {
 			} else {
 				task_input_el.setAttribute("readonly", "readonly");
 				task_edit_el.innerText = "Edit";
-			}
+
+				for (let i = 0; i < tempArr.length; i++) {
+					if (tempArr[i] !== task_input_el.value) {
+						tempArr[i] = task_input_el.value;
+						console.log(tempArr[i], task_input_el.value)
+
+						// localStorage.setItem('Tasks', JSON.stringify(tempArr))
+					} else {
+						console.log(tempArr[i] = oldValue)
+					}
+				};
+			};
 		});
 
 		task_edit_el.addEventListener("click", (e) => {
@@ -148,17 +163,17 @@ window.addEventListener("load", () => {
 		});
 
 	});
-var i = 0;
-var txt = "What do you have planned today?";
+	var i = 0;
+	var txt = "What do you have planned today?";
 
-function typeWriter() {
-	if (i < txt.length) {
-		document.getElementsByClassName("js-typewrite")[0].innerHTML +=
-			txt.charAt(i);
-		i++;
-		setTimeout(typeWriter, 100);
+	function typeWriter() {
+		if (i < txt.length) {
+			document.getElementsByClassName("js-typewrite")[0].innerHTML +=
+				txt.charAt(i);
+			i++;
+			setTimeout(typeWriter, 100);
+		}
 	}
-}
 
-setTimeout(typeWriter, 2000);}
+	setTimeout(typeWriter, 2000);
 });
