@@ -4,70 +4,92 @@ window.addEventListener("load", () => {
 	const list_el = document.querySelector("#tasks");
 	let arr = [];
 
-	// const displayStoragedTasks = function () {
-	// 	if (arr.length === 0 && localStorage.length) {
-	// 		arr = JSON.parse(localStorage.getItem("Tasks"));
+	const displayStoragedTasks = function () {
 
-	// 		for (var item of arr) {
-	// 			const task_el_storage = document.createElement("div");
-	// 			task_el_storage.classList.add("task");
+		arr = JSON.parse(localStorage.getItem("Tasks"));
+		if (arr === null) {
+			arr = [];
+		} else {
+			for (var item of arr) {
+				const task_el_storage = document.createElement("div");
+				task_el_storage.classList.add("task");
 
-	// 			const task_content_el_storage = document.createElement("div");
-	// 			task_content_el_storage.classList.add("content");
+				const task_content_el_storage = document.createElement("div");
+				task_content_el_storage.classList.add("content");
 
-	// 			//Input
-	// 			const task_input_el_storage = document.createElement("input");
-	// 			task_input_el_storage.classList.add("text");
-	// 			task_input_el_storage.type = "text";
-	// 			task_input_el_storage.value = item;
-	// 			task_input_el_storage.setAttribute("readonly", "readonly");
+				//Input
+				const task_input_el_storage = document.createElement("input");
+				task_input_el_storage.classList.add("text");
+				task_input_el_storage.type = "text";
+				task_input_el_storage.value = item.taskName;
+				task_input_el_storage.setAttribute("readonly", "readonly");
 
-	// 			task_el_storage.appendChild(task_content_el_storage);
-	// 			task_content_el_storage.appendChild(task_input_el_storage);
+				task_el_storage.appendChild(task_content_el_storage);
+				task_content_el_storage.appendChild(task_input_el_storage);
 
-	// 			//Actions
-	// 			const task_actions_el_storage = document.createElement("div");
-	// 			task_actions_el_storage.classList.add("actions");
+				//Actions
+				const task_actions_el_storage = document.createElement("div");
+				task_actions_el_storage.classList.add("actions");
 
-	// 			const task_edit_el_storage = document.createElement("button");
-	// 			task_edit_el_storage.classList.add("edit");
-	// 			task_edit_el_storage.innerHTML = "Edit";
+				const task_edit_el_storage = document.createElement("button");
+				task_edit_el_storage.id = item.id // For having edit button id for finding object id
+				task_edit_el_storage.classList.add("edit");
+				task_edit_el_storage.innerHTML = "Edit";
 
-	// 			const task_delete_el_storage = document.createElement("button");
-	// 			task_delete_el_storage.classList.add("delete");
-	// 			task_delete_el_storage.innerHTML = "Delete";
+				const task_delete_el_storage = document.createElement("button");
+				task_delete_el_storage.classList.add("delete");
+				task_delete_el_storage.innerHTML = "Delete";
 
-	// 			task_actions_el_storage.appendChild(task_edit_el_storage);
-	// 			task_actions_el_storage.appendChild(task_delete_el_storage);
+				task_actions_el_storage.appendChild(task_edit_el_storage);
+				task_actions_el_storage.appendChild(task_delete_el_storage);
 
-	// 			task_el_storage.appendChild(task_actions_el_storage);
-	// 			list_el.appendChild(task_el_storage);
+				task_el_storage.appendChild(task_actions_el_storage);
+				list_el.appendChild(task_el_storage);
 
-	// 			task_delete_el_storage.addEventListener("click", (e) => {
-	// 				// Getting array from storage
-	// 				const tempArr = JSON.parse(localStorage.getItem("Tasks"));
-	// 				// Removing tasks
-	// 				const filter = tempArr.filter(
-	// 					(e) => e !== task_input_el_storage.value
-	// 				);
-	// 				// Re-setting storage
-	// 				localStorage.setItem("Tasks", JSON.stringify(filter));
-	// 				list_el.removeChild(task_el_storage);
-	// 			});
+				task_delete_el_storage.addEventListener("click", (e) => {
+					// Getting array from storage
+					const tempArr = JSON.parse(localStorage.getItem("Tasks"));
+					// Removing tasks
+					const filter = tempArr.filter((e) => e.taskName !== task_input_el_storage.value);
+					// Re-setting storage
+					localStorage.setItem("Tasks", JSON.stringify(filter));
+					list_el.removeChild(task_el_storage);
+				});
 
-	// 			task_edit_el_storage.addEventListener('click', (e) => {
-	// 				task_edit_el_storage.removeAttribute('readonly');
-	// 				task_input_el_storage.setAttribute('readonly', true);
-	// 				// localStorage.setItem('todos', JSON.stringify(todos));
-	// 				displayStoragedTasks();
-	// 			});
-	// 		}
-	// 	};
-	// };
-	// displayStoragedTasks();
+				task_edit_el_storage.addEventListener('click', (e) => {
+					task_edit_el_storage.removeAttribute('readonly');
+					task_input_el_storage.setAttribute('readonly', true);
+
+					let index = arr.findIndex(function (item) { // Gettting object id
+						return parseInt(e.target.id) === item.id
+					})
+
+					if (task_edit_el_storage.innerText.toLowerCase() == "edit") {
+						task_input_el_storage.removeAttribute("readonly");
+						task_input_el_storage.focus();
+						task_edit_el_storage.innerText = "save";
+					} else {
+						task_input_el_storage.setAttribute("readonly", "readonly");
+						task_edit_el_storage.innerText = "Edit";
+
+						if (index !== -1) { // If object id is true(exists)
+							arr[index].taskName = task_input_el_storage.value; // Updating its value
+							localStorage.setItem('Tasks', JSON.stringify(arr)); // Re-setting storage
+						};
+					};
+				});
+			};
+		}
+	};
+	displayStoragedTasks();
 
 	form.addEventListener("submit", (e) => {
 		e.preventDefault();
+
+		arr = JSON.parse(localStorage.getItem("Tasks"));
+		if (arr === null) {
+			arr = [];
+		};
 
 		const task = input.value;
 
@@ -76,10 +98,6 @@ window.addEventListener("load", () => {
 			return;
 		}
 
-		//Pushing new task to array
-		arr.push(task);
-		//Saving array in storage
-		localStorage.setItem("Tasks", `${JSON.stringify(arr)}`);
 
 		const task_el = document.createElement("div");
 		task_el.classList.add("task");
@@ -101,6 +119,7 @@ window.addEventListener("load", () => {
 		task_actions_el.classList.add("actions");
 
 		const task_edit_el = document.createElement("button");
+		task_edit_el.id = arr.length // For having edit button id for finding object id
 		task_edit_el.classList.add("edit");
 		task_edit_el.innerHTML = "Edit";
 
@@ -117,11 +136,20 @@ window.addEventListener("load", () => {
 
 		input.value = "";
 
-		task_edit_el.addEventListener("click", () => {
-			let tempArr = JSON.parse(localStorage.getItem("Tasks"));
-			let oldValue = tempArr.filter((e) => e === task_input_el.value);
-			var index = tempArr.indexOf(oldValue)
-			console.log(index, oldValue)
+		let newTask = {
+			id: arr.length,
+			taskName: task
+		};
+
+		arr.push(newTask);
+		localStorage.setItem("Tasks", JSON.stringify(arr)); // Updating array state
+
+		task_edit_el.addEventListener("click", (e) => {
+			const tempArr = JSON.parse(localStorage.getItem("Tasks"));
+
+			let index = tempArr.findIndex(function (item) { // Gettting object id
+				return parseInt(e.target.id) === item.id
+			})
 
 			if (task_edit_el.innerText.toLowerCase() == "edit") {
 				task_input_el.removeAttribute("readonly");
@@ -131,22 +159,13 @@ window.addEventListener("load", () => {
 				task_input_el.setAttribute("readonly", "readonly");
 				task_edit_el.innerText = "Edit";
 
-				// for (let i = 0; i < tempArr.length; i++) {
-				// 	if (oldValue !== newValue) {
-				// 		oldValue = newValue //Changing from old to new
-				// 		tempArr.slice(oldValue, 1, newValue)
-				// 		console.log(tempArr)
-				// 	}
-				// 	console.log(tempArr)
-				// };
-				// const newValue = task_input_el.value
-				// tempArr.splice(oldValue, oldValue, newValue)
-				// console.log(tempArr)
-			}
+				if (index !== -1) { // If object id is true(exists)
+					tempArr[index].taskName = task_input_el.value; // Updating its value
+					localStorage.setItem('Tasks', JSON.stringify(tempArr));  // Re-setting storage
+				};
+			};
 		});
 
-
-		// localStorage.setItem('Tasks', JSON.stringify(tempArr))
 		// task_edit_el.addEventListener("click", (e) => {
 		// 	if (task_edit_el.innerText.toLowerCase() == "edit") {
 		// 		task_edit_el.innerText = "Save";
@@ -161,11 +180,12 @@ window.addEventListener("load", () => {
 		task_delete_el.addEventListener("click", (e) => {
 			const tempArr = JSON.parse(localStorage.getItem("Tasks"));
 			// Removing tasks
-			const filter = tempArr.filter((e) => e !== task_input_el.value);
+			const filter = tempArr.filter((e) => e.taskName !== task_input_el.value);
 			// Re-setting storage
 			localStorage.setItem("Tasks", JSON.stringify(filter));
 			list_el.removeChild(task_el);
 		});
+
 
 	});
 	var i = 0;
