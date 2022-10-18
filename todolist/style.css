@@ -231,6 +231,17 @@ main {
 	transition: 0.4s;
 }
 
+#tasks{
+	position: absolute;
+}
+#tasksheader{
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  position: absolute;
+  background-color: var(--purple);
+  color: #fff;
+}
 .task .actions button:hover {
 	opacity: 0.8;
 }
