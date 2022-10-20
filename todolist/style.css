@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 @import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
 :root {
 	--dark: #374151;
 	--darker: #1f2937;
@@ -110,17 +111,19 @@ main {
 	border-radius: 1rem;
 	margin-bottom: 1rem;
 }
+
 #tasks .task .content {
 	flex: 1 1 0%;
 }
-.todo-item > .checkbox {
+
+.todo-item>.checkbox {
 	margin-right: 20px;
 	position: relative;
 	width: 0;
 	transition: all 0.2s ease-in-out;
 }
 
-.todo-item > .checkbox::before {
+.todo-item>.checkbox::before {
 	content: "";
 	position: absolute;
 	transform: translate(-50%, -50%);
@@ -143,6 +146,7 @@ main {
 	color: rgba(255, 255, 255, 0.75);
 	font-family: "Anonymous Pro", monospace;
 }
+
 .typewrite {
 	font-size: 180%;
 	border-right: 2px solid rgba(255, 255, 255, 0.75);
@@ -158,6 +162,7 @@ main {
 	from {
 		border-right-color: rgba(255, 255, 255, 0.75);
 	}
+
 	to {
 		border-right-color: transparent;
 	}
@@ -186,6 +191,7 @@ main {
 	from {
 		border-right-color: rgba(255, 255, 255, 0.75);
 	}
+
 	to {
 		border-right-color: transparent;
 	}
@@ -197,11 +203,12 @@ main {
 	opacity: 0.8;
 }
 
-.todo-item.checked > .checkbox::before {
+.todo-item.checked>.checkbox::before {
 	border: 5px solid rgb(170, 207, 255);
 	background-color: rgb(23, 124, 255);
 	transition: all 0.2s ease-in-out;
 }
+
 /* GLOBAL STYLES */
 
 /* DEMO-SPECIFIC STYLES */
@@ -231,17 +238,19 @@ main {
 	transition: 0.4s;
 }
 
-#tasks{
+#tasks {
 	position: absolute;
 }
-#tasksheader{
-  padding: 10px;
-  cursor: move;
-  z-index: 10;
-  position: absolute;
-  background-color: var(--purple);
-  color: #fff;
+
+#tasksheader {
+	padding: 10px;
+	cursor: move;
+	z-index: 10;
+	position: absolute;
+	background-color: var(--purple);
+	color: #fff;
 }
+
 .task .actions button:hover {
 	opacity: 0.8;
 }

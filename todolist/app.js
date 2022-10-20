@@ -2,6 +2,7 @@ window.addEventListener("load", () => {
 	const form = document.querySelector("#new-task-form");
 	const input = document.querySelector("#new-task-input");
 	const list_el = document.querySelector("#tasks");
+	
 	let arr = [];
 
 	const displayStoragedTasks = function () {
@@ -81,6 +82,7 @@ window.addEventListener("load", () => {
 			};
 		}
 	};
+
 	displayStoragedTasks();
 
 	form.addEventListener("submit", (e) => {
@@ -188,6 +190,7 @@ window.addEventListener("load", () => {
 
 
 	});
+	
 	var i = 0;
 	var txt = "What do you have planned today?";
 
@@ -208,6 +211,7 @@ dragElement(document.getElementById("tasks"));
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  
   if (document.getElementById(elmnt.id + "header")) {
     /* if present, the header is where you move the DIV from:*/
     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
