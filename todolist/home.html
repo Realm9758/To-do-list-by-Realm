@@ -1,97 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>To do list</title>
-        
-        <!-- #region Meta-->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <!-- #endregion -->
-        
-        <!-- #region Style Imports-->
-        <link rel="stylesheet" href="style.css">
-        
-        <!-- #endregion -->
-        
-        <!-- #region FontAwesome Imports-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-        <script src="https://kit.fontawesome.com/ab264822a8.js" crossorigin="anonymous"></script>
-        
-        <!-- #endregion -->
-        
-        <script defer src="app.js"></script>
-        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" style="text-align: right;" />
-    </head>
+	<head>
+		<title>To do list</title>
 
-    <body>
+		<!-- #region Meta-->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <header>
-            <h1>To Do List</h1>
-            
-            <form id="new-task-form">
-                <input 
-                    type="text" 
-                    id="new-task-input" 
-                    placeholder="What do you have planned?" 
-                />
+		<!-- #endregion -->
 
-                <input 
-                    type="submit" 
-                    id="new-task-submit" 
-                    value="Add task" 
-                />
-            </form>
-        </header>
+		<!-- #region Style Imports-->
+		<link rel="stylesheet" href="style.css" />
 
-<<<<<<< HEAD
-        <main>
-            <section class="task-list" id="tasks">
-                <h2>Tasks</h2>
-                <div id="tasksheader"></div>
-            </section>
-        </main>
-=======
-    <header>
-        <h1>
-            To Do List
-        </h1>
-        <form id="new-task-form">
-            <input type="text" id="new-task-input" placeholder="What do you have planned?" />
-                
-            <input type="submit" id="new-task-submit" value="Add task" />
-            <div class="options">
-					<label>
-						<input type="radio" name="category" id="category1" value="business" /> 
-						<span class="bubble business"></span>
-						<div>Business</div>
-					</label>
-					<label>
-						<input type="radio" name="category" id="category2" value="personal" />
-						<span class="bubble personal"></span>
-						<div>Personal</div>
-					</label>
-				</div>
+		<!-- #endregion -->
 
-        </form>
-    </header>
-    <main>
-        <section class="task-list" id="tasks">
-            <h2>Tasks</h2>
-            <div id="tasksheader">
-                <link rel="shortcut icon" type="image/x-icon"  href="/favicon.ico" style="text-align: right;"/>
+		<!-- #region FontAwesome Imports-->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+		/>
+		<script
+			src="https://kit.fontawesome.com/ab264822a8.js"
+			crossorigin="anonymous"
+		></script>
 
+		<!-- #endregion -->
 
-            </div>
-        </section>
-    </main>
+		<script defer src="app.js"></script>
+		<link
+			rel="shortcut icon"
+			type="image/x-icon"
+			href="/favicon.ico"
+			style="text-align: right"
+		/>
+	</head>
 
-    <!-- </div> -->
+	<body>
+		<header>
+			<h1>To Do List</h1>
 
+			<form id="new-task-form">
+				<input
+					type="text"
+					id="new-task-input"
+					placeholder="What do you have planned?"
+				/>
 
+				<input type="submit" id="new-task-submit" value="Add task" />
+			</form>
+		</header>
 
-</body>
->>>>>>> 42bebf4 (dwa)
-
-    </body>
+		<main>
+			<section class="task-list" id="tasks">
+				<h2>Tasks</h2>
+				<div id="tasksheader"></div>
+			</section>
+		</main>
+	</body>
 </html>
